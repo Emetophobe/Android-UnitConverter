@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2013 Mike Cunningham
+ 
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+  http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<resources>
+
+    <string-array name="area_names">
+        <item>acres</item>
+        <item>ares</item>
+        <item>circular inches</item>
+        <item>hectares</item>
+        <item>hides</item>
+        <item>roods</item>
+        <item>square centimeters</item>
+        <item>square feet</item>
+        <item>square feet (US survey)</item>
+        <item>square inches</item>
+        <item>square kilometers</item>
+        <item>square meters</item>
+        <item>square miles</item>
+        <item>square millimeters</item>
+        <item>squares</item>
+        <item>square rods (poles)</item>
+        <item>square yards</item>
+        <item>townships</item>
+    </string-array>
+    
+    <string-array name="area_units">
+        <item>4046.8564224</item>
+        <item>100.0</item>
+        <item>0.000506707479</item>
+        <item>1e4</item>
+        <item>485000</item>
+        <item>1011.7141056</item>
+        <item>1e-4</item>
+        <item>0.09290304</item>
+        <item>0.092903411613</item>
+        <item>0.00064516</item>
+        <item>1e6</item>
+        <item>1.0</item>
+        <item>2589988.110336</item>
+        <item>1e-6</item>
+        <item>9.290304</item>
+        <item>25.29285264</item>
+        <item>0.83612736</item>
+        <item>93239571.972</item>
+    </string-array>
+
+	<string-array name="bytes_names">
+		<item>bits</item>
+		<item>bytes</item>
+		<item>kilobits</item>
+		<item>kilobytes</item>
+		<item>megabits</item>
+		<item>megabytes</item>
+		<item>gigabits</item>
+		<item>gigabytes</item>
+		<item>terabits</item>
+		<item>terabytes</item>
+		<item>petabits</item>
+		<item>petabytes</item>
+	</string-array>
+    
+	<string-array name="bytes_units">
+	    <item>0.125</item>
+		<item>1.0</item>
+		<item>128.0</item>
+		<item>1024.0</item>
+		<item>131072.0</item>
+		<item>1048576.0</item>
+		<item>134217728.0</item>
+		<item>1073741824.0</item>
+		<item>137438953472.0</item>
+		<item>1099511627776.0</item>
+		<item>140737488355328.0</item>
+		<item>1125899906842624.0</item>
+	</string-array>
+	
+	<string-array name="density_names">
+		<item>grains/gallon (UK)</item>
+		<item>grains/gallon (US)</item>
+		<item>grams/cubic centimeters</item>
+		<item>grams/liter</item>
+		<item>grams/milliliters</item>
+		<item>kilograms/cubic meters</item>
+		<item>kilograms/liter</item>
+		<item>megagrams/cubic meter</item>
+		<item>milligrams/milliliter</item>
+		<item>milligrams/liter</item>
+		<item>ounces/cubic inch</item>
+		<item>ounces/gallon (UK)</item>
+		<item>ounces/gallon (US)</item>
+		<item>pounds/cubic inch</item>
+		<item>pounds/cubic foot</item>
+		<item>pounds/gallon (UK)</item>
+		<item>pounds/gallon (US)</item>
+		<item>slugs/cubic foot</item>
+		<item>tonnes/cubic meter</item>
+		<item>tons (UK)/cubic yard</item>
+		<item>tons (US)/cubic yard</item>
+	</string-array>
+    
+    <string-array name="density_units">
+        <item>0.000014253948343691203</item>
+		<item>0.000017118011571775823</item>
+		<item>1.0</item>
+		<item>1e-3</item>
+		<item>1.0</item>
+		<item>1e-3</item>
+		<item>1.0</item>
+		<item>1.0</item>
+		<item>1e-3</item>
+		<item>1e-6</item>
+		<item>1.729994044</item>
+		<item>0.006236023</item>
+		<item>0.007489152</item>
+		<item>27.679904</item>
+		<item>0.016018463</item>
+		<item>0.099776373</item>
+		<item>0.119826427</item>
+		<item>0.51531788206</item>
+		<item>1.0</item>
+		<item>1.328939184</item>
+		<item>1.186552843</item>
+	</string-array>
+	
+	<string-array name="length_names">
+		<item>centimeters</item>
+		<item>decimeters</item>
+		<item>feet</item>
+		<item>inches</item>
+		<item>kilometers</item>
+		<item>meters</item>
+		<item>micrometers</item>
+		<item>miles</item>
+		<item>millimeters</item>
+		<item>nanometers</item>
+		<item>yards</item>
+	</string-array>
+	
+    <string-array name="length_units">
+        <item>0.01</item>
+		<item>0.1</item>
+		<item>0.3048</item>
+		<item>0.0254</item>
+		<item>1000.0</item>
+		<item>1.0</item>
+		<item>1e-6</item>
+		<item>1609.344</item>
+		<item>0.001</item>
+		<item>1e-9</item>
+		<item>0.9144</item>
+	</string-array>
+	
+    <string-array name="mass_names">
+		<item>carats</item>
+		<item>grams</item>
+		<item>kilograms</item>
+		<item>milligrams</item>
+		<item>ounces</item>
+		<item>pounds</item>
+		<item>stones</item>
+		<item>tons (UK)</item>
+		<item>tons (US)</item>
+		<item>tonnes</item>
+	</string-array>
+    
+    <string-array name="mass_units">
+		<item> 0.0002</item>
+		<item>1e-3</item>
+		<item>1.0</item>
+		<item>1e-6</item>
+		<item>0.028349523125</item>
+		<item>0.45359237</item>
+		<item>6.35029318</item>
+		<item>1016.0469088</item>
+		<item>907.18474</item>
+		<item>1000.0</item>
+	</string-array>
+	
+    <string-array name="temperature_names">
+		<item>celsius</item>
+		<item>fahrenheit</item>
+		<item>kelvin</item>
+		<item>rankine</item>
+	</string-array>
+	
+    <string-array name="time_names">
+		<item>centuries</item>
+		<item>days</item>
+		<item>decades</item>
+		<item>femtoseconds</item>
+		<item>fortnights</item>
+		<item>hours</item>
+		<item>microseconds</item>
+		<item>millenia</item>
+		<item>milliseconds</item>
+		<item>minutes</item>
+		<item>months</item>
+		<item>nanoseconds</item>
+		<item>picoseconds</item>
+		<item>seconds</item>
+		<item>weeks</item>
+		<item>years</item>
+		<item>years (gregorian)</item>
+		<item>years (julian)</item>
+		<item>years (leap)</item>
+	</string-array>
+    
+    <string-array name="time_units">
+        <item>3153600000.0</item>
+		<item>86400.0</item>
+		<item>315360000.0</item>
+		<item>1e-15</item>
+		<item>1209600.0</item>
+		<item>3600.0</item>
+		<item>1e-6</item>
+		<item>31536000000.0</item>
+		<item>1e-3</item>
+		<item>60.0</item>
+		<item>2629743.83</item>
+		<item>1e-9</item>
+		<item>1e-12</item>
+		<item>1.0</item>
+		<item>604800.0</item>
+		<item>31536000.0</item>
+		<item>31556952.0</item>
+		<item>31557600.0</item>
+		<item>31622400.0</item>
+    </string-array>
+    
+    <string-array name="volume_names">
+		<item>bushels (UK)</item>
+		<item>bushels (US)</item>
+		<item>centiliters</item>
+		<item>cubic centimeters</item>
+		<item>cubic decimeters</item>
+		<item>cubic decameters</item>
+		<item>cubic feet</item>
+		<item>cubic inches</item>
+		<item>cubic meters</item>
+		<item>cubic millimeters</item>
+		<item>cubic yards</item>
+		<item>cups</item>
+		<item>deciliters</item>
+		<item>fluid ounces (UK)</item>
+		<item>fluid ounces (US)</item>
+		<item>gallons (UK)</item>
+		<item>gallons (US, dry)</item>
+		<item>gallons (US, liquid)</item>
+		<item>liters</item>
+		<item>milliliters</item>
+		<item>pints (UK)</item>
+		<item>pints (US, dry)</item>
+		<item>pints (US, liquid)</item>
+		<item>quarts (UK)</item>
+		<item>quarts (US, dry)</item>
+		<item>quarts (US, liquid)</item>
+		<item>tablespoons</item>
+		<item>teaspoons</item>
+	</string-array>
+	
+    <string-array name="volume_units">
+        <item>36.368735</item>
+		<item>35.239072</item>
+		<item>0.01</item>
+		<item>1e-3</item>
+		<item>1.0</item>
+		<item>1e6</item>
+		<item>28.316846592</item>
+		<item>0.016387064</item>
+		<item>1e3</item>
+		<item>1e-6</item>
+		<item>764.554857984</item>
+		<item>0.2365882365</item>
+		<item>0.1</item>
+		<item>0.0284130625</item>
+		<item>0.0295735296</item>
+		<item>4.54609</item>
+		<item>4.40488377086</item>
+		<item>3.785411784</item>
+		<item>1.0</item>
+		<item>1e-3</item>
+		<item>0.56826125</item>
+		<item>0.550610471</item>
+		<item>0.473176473</item>
+		<item>1.1365225</item>
+		<item>1.101220942715</item>
+		<item>0.946352946</item>
+		<item>0.01478676478125</item>
+		<item>0.00492892159375</item>
+	</string-array>
+</resources>

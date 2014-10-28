@@ -1,0 +1,68 @@
+/*
+ * Copyright (C) 2013-2014 Mike Cunningham
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.emetophobe.unitconverter.converters;
+
+import com.emetophobe.unitconverter.MathUtils;
+
+
+public class TemperatureConverter implements ConverterInterface {
+	@Override
+	public Double convert(Double[] units, int sourceUnit, int destUnit, double value, int precision) {
+		// Just return the value if the indexes are the same, or if the value is 0
+		if (sourceUnit == destUnit || value == 0.0) {
+			return value;
+		}
+
+		value = toKelvin(sourceUnit, value); // First convert the value to kelvin
+		value = fromKelvin(destUnit, value); // Then convert the value from kelvin to the desired unit
+
+		// Round the result
+		return MathUtils.round(value, precision);
+	}
+
+	/**
+	 * Convert the unit to kelvin.
+	 */
+	private double toKelvin(int sourceIndex, double value) {
+		switch (sourceIndex) {
+			case 0: // celsius to kelvin
+				return value + 273.15;
+			case 1: // fahrenheit to kelvin
+				return (value + 459.67) * 5 / 9;
+			case 3: // rankine to kelvin
+				return value * 5 / 9;
+			default:
+				return value;
+		}
+	}
+
+	/**
+	 * Convert the unit from kelvin.
+	 */
+	private double fromKelvin(int destIndex, double value) {
+		switch (destIndex) {
+			case 0: // kelvin to celsius
+				return value - 273.15;
+			case 1: // kelvin to fahrenheit
+				return value * 9 / 5 - 459.67;
+			case 3: // kelvin to rankine
+				return value * 9 / 5;
+			default:
+				return value;
+		}
+	}
+}
