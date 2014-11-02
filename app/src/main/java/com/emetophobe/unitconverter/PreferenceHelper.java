@@ -26,29 +26,29 @@ public class PreferenceHelper {
 	public static final String PREF_VALUE = "pref_value";
 	public static final String PREF_INDEX = "pref_index";
 
+	private static final String DEFAULT_VALUE = "1.0";
+	private static final String DEFAULT_PRECISION = "5";
+
 	private SharedPreferences mSharedPrefs;
 	private SharedPreferences mUnitPrefs;
-
-	private String mDefaultPrecision;
 
 	public PreferenceHelper(Context context, String converterName) {
 		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 		mUnitPrefs = context.getSharedPreferences(converterName + "Prefs", 0);
-		mDefaultPrecision = context.getString(R.string.pref_precision_default);
 	}
 
 	public int getPrecision() {
-		return MathUtils.parseInt(mSharedPrefs.getString(PREF_PRECISION, mDefaultPrecision));
+		return MathUtils.parseInt(mSharedPrefs.getString(PREF_PRECISION, DEFAULT_PRECISION));
 	}
 
 	public String getValue() {
-		return mUnitPrefs.getString(PREF_VALUE, "1.0");
+		return mUnitPrefs.getString(PREF_VALUE, DEFAULT_VALUE);
 	}
 
 	public void setValue(String value) {
 		SharedPreferences.Editor editor = mUnitPrefs.edit();
 		editor.putString(PREF_VALUE, value);
-		editor.commit();
+		editor.apply();
 	}
 
 	public int getIndex() {
@@ -58,7 +58,7 @@ public class PreferenceHelper {
 	public void setIndex(int index) {
 		SharedPreferences.Editor editor = mUnitPrefs.edit();
 		editor.putInt(PREF_INDEX, index);
-		editor.commit();
+		editor.apply();
 	}
 
 	public void registerListener(OnSharedPreferenceChangeListener listener) {
