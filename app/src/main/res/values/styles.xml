@@ -35,4 +35,8 @@
 		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
 		<item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
 	</style>
+
+	<style name="NavDrawerTextStyle" parent="@android:style/TextAppearance.Small">
+		<item name="android:textColor">@color/navDrawerText</item>
+	</style>
 </resources>
