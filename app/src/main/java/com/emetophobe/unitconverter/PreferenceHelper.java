@@ -22,9 +22,9 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
 public class PreferenceHelper {
-	public static final String PREF_PRECISION = "pref_precision";
-	public static final String PREF_VALUE = "pref_value";
-	public static final String PREF_INDEX = "pref_index";
+	private static final String PREF_PRECISION = "pref_precision";
+	private static final String PREF_VALUE = "pref_value";
+	private static final String PREF_INDEX = "pref_index";
 
 	private static final String DEFAULT_VALUE = "1.0";
 	private static final String DEFAULT_PRECISION = "5";
