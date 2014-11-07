@@ -118,6 +118,7 @@ public class NavDrawerFragment extends Fragment {
 		});
 
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+		selectItem(mCurrentSelectedPosition);
 	}
 
 	public boolean isDrawerOpen() {
