@@ -20,6 +20,16 @@ import com.emetophobe.unitconverter.MathUtils;
 
 
 public class TemperatureConverter implements ConverterInterface {
+	/**
+	 * Convert one unit type to another unit type.
+	 *
+	 * @param units      The array of unit values.
+	 * @param sourceUnit The source unit type.
+	 * @param destUnit   The destination unit type.
+	 * @param value      The number to convert.
+	 * @param precision  The decimal precision to round to.
+	 * @return The converted number.
+	 */
 	@Override
 	public Double convert(Double[] units, int sourceUnit, int destUnit, double value, int precision) {
 		// Just return the value if the indexes are the same, or if the value is 0
@@ -36,9 +46,13 @@ public class TemperatureConverter implements ConverterInterface {
 
 	/**
 	 * Convert the unit to kelvin.
+	 *
+	 * @param sourceUnit The source unit type.
+	 * @param value      The number to convert.
+	 * @return The converted number.
 	 */
-	private double toKelvin(int sourceIndex, double value) {
-		switch (sourceIndex) {
+	private double toKelvin(int sourceUnit, double value) {
+		switch (sourceUnit) {
 			case 0: // celsius to kelvin
 				return value + 273.15;
 			case 1: // fahrenheit to kelvin
@@ -52,9 +66,13 @@ public class TemperatureConverter implements ConverterInterface {
 
 	/**
 	 * Convert the unit from kelvin.
+	 *
+	 * @param destUnit The destination unit type.
+	 * @param value    The number to convert.
+	 * @return The converted number.
 	 */
-	private double fromKelvin(int destIndex, double value) {
-		switch (destIndex) {
+	private double fromKelvin(int destUnit, double value) {
+		switch (destUnit) {
 			case 0: // kelvin to celsius
 				return value - 273.15;
 			case 1: // kelvin to fahrenheit

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.emetophobe.unitconverter.converters;
+package com.emetophobe.unitconverter;
 
 public class Constants {
 	/** Unit conversion types. */

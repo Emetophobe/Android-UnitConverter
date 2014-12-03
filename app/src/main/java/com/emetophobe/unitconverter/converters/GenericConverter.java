@@ -20,6 +20,16 @@ import com.emetophobe.unitconverter.MathUtils;
 
 
 public class GenericConverter implements ConverterInterface {
+	/**
+	 * Convert one unit type to another unit type.
+	 *
+	 * @param units      The array of unit values.
+	 * @param sourceUnit The source unit type.
+	 * @param destUnit   The destination unit type.
+	 * @param value      The number to convert.
+	 * @param precision  The decimal precision to round to.
+	 * @return The converted number.
+	 */
 	@Override
 	public Double convert(Double[] units, int sourceUnit, int destUnit, double value, int precision) {
 		// Just return the value if the units are the same or if the value is 0

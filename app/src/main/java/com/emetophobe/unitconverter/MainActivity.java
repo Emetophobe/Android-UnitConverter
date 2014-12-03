@@ -37,11 +37,11 @@ public class MainActivity extends ActionBarActivity implements NavDrawerFragment
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		// Set up the toolbar
+		// Set up the toolbar.
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		// Set up the drawer.
+		// Set up the navigation drawer.
 		mNavDrawerFragment = (NavDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
 		mNavDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
@@ -49,9 +49,6 @@ public class MainActivity extends ActionBarActivity implements NavDrawerFragment
 		mTitle = getTitle();
 	}
 
-	/**
-	 * Create the options menu.
-	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		if (!mNavDrawerFragment.isDrawerOpen()) {
@@ -67,9 +64,6 @@ public class MainActivity extends ActionBarActivity implements NavDrawerFragment
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	/**
-	 * Options menu callback.
-	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -80,9 +74,6 @@ public class MainActivity extends ActionBarActivity implements NavDrawerFragment
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * Called when a navigation drawer item is selected.
-	 */
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		mTitle = mConverterNames[position];

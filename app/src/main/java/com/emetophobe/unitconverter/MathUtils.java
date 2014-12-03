@@ -22,6 +22,10 @@ import android.util.Log;
 public class MathUtils {
 	/**
 	 * Round a number to n decimal places.
+	 *
+	 * @param number The number to round.
+	 * @param n      The number of decimal places.
+	 * @return The rounded number.
 	 */
 	public static double round(double number, int n) {
 		double pow = Math.pow(10, n);
@@ -30,26 +34,32 @@ public class MathUtils {
 
 	/**
 	 * Convert a string to an integer.
+	 *
+	 * @param text The string to convert.
+	 * @return the integer value if successful, 0 if there was an error.
 	 */
-	public static int parseInt(String s) {
+	public static int parseInt(String text) {
 		int value = 0;
 		try {
-			value = Integer.valueOf(s);
+			value = Integer.valueOf(text);
 		} catch (NumberFormatException e) {
-			Log.d("MathUtils", "NumberFormatException when attempting to parse an integer from the string: " + s);
+			Log.d("MathUtils", "NumberFormatException when attempting to parse an integer from the string: " + text);
 		}
 		return value;
 	}
 
 	/**
 	 * Convert a string to a double.
+	 *
+	 * @param text The string to convert.
+	 * @return the double value if successful, 0 if there was an error.
 	 */
-	public static double parseDouble(String s) {
+	public static double parseDouble(String text) {
 		double value = 0;
 		try {
-			value = Double.valueOf(s);
+			value = Double.valueOf(text);
 		} catch (NumberFormatException e) {
-			Log.d("MathUtils", "NumberFormatException when attempting to parse a double from the string: " + s);
+			Log.d("MathUtils", "NumberFormatException when attempting to parse a double from the string: " + text);
 		}
 		return value;
 	}

@@ -32,7 +32,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.emetophobe.unitconverter.converters.Constants;
 import com.emetophobe.unitconverter.converters.ConverterInterface;
 import com.emetophobe.unitconverter.converters.GenericConverter;
 import com.emetophobe.unitconverter.converters.TemperatureConverter;
@@ -56,6 +55,8 @@ public class ConverterFragment extends ListFragment implements OnSharedPreferenc
 	private PreferenceHelper mSharedPrefs;
 	private int mPrecision;
 
+	private ArrayList<Pair<String, Double>> mConversionList = new ArrayList<Pair<String, Double>>();
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_converter, container, false);
@@ -68,57 +69,32 @@ public class ConverterFragment extends ListFragment implements OnSharedPreferenc
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		// Get the converter type and name
+		// Get the converter type and name.
 		int converterType = getArguments().getInt(CONVERTER_TYPE);
 		String converterName = getArguments().getString(CONVERTER_NAME);
 
 		setupConverter(converterType);
 
-		// Setup the shared preferences
+		// Set up the shared preferences.
 		mSharedPrefs = new PreferenceHelper(getActivity(), converterName);
 		mSharedPrefs.registerListener(this);
 		mPrecision = mSharedPrefs.getPrecision();
 
-		// Create the list adapter
-		mAdapter = new ConverterAdapter(getActivity());
+		// Set up the list adapter.
+		mAdapter = new ConverterAdapter(getActivity(), mConversionList);
 		setListAdapter(mAdapter);
 
-		// Setup the unit spinner
+		// Set up the unit spinner.
 		ArrayAdapter<CharSequence> spinnerAdapter = new ArrayAdapter<CharSequence>(getActivity(),
 				android.R.layout.simple_spinner_item, mUnitNames);
 		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mUnitSpinner.setAdapter(spinnerAdapter);
-		mUnitSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				updateListView();
-			}
+		mUnitSpinner.setOnItemSelectedListener(mOnSpinnerItemSelected);
 
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// do nothing
-			}
-		});
+		// Set up the value edit text watcher.
+		mValueEdit.addTextChangedListener(mOnValueEditTextChanged);
 
-		// Setup the value edit
-		mValueEdit.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				updateListView();
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// do nothing
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-				// do nothing
-			}
-		});
-
-		// Restore the previous unit value and spinner position
+		// Restore the previous unit value and spinner position.
 		mValueEdit.setText(mSharedPrefs.getValue());
 		mUnitSpinner.setSelection(mSharedPrefs.getIndex());
 	}
@@ -146,61 +122,78 @@ public class ConverterFragment extends ListFragment implements OnSharedPreferenc
 		updateListView();
 	}
 
+	/**
+	 * Generate the conversion data and update the adapter.
+	 */
 	private void updateListView() {
 		// Get the unit type and value to be converted
 		int sourceUnit = mUnitSpinner.getSelectedItemPosition();
 		double value = MathUtils.parseDouble(mValueEdit.getText().toString());
 
+		mConversionList.clear();
+
 		// Create the conversion list
-		ArrayList<Pair<String, Double>> list = new ArrayList<Pair<String, Double>>();
 		for (int destUnit = 0; destUnit < mUnitNames.length; destUnit++) {
 			// ignore identical unit types
 			if (sourceUnit != destUnit) {
-				list.add(new Pair<String, Double>(mUnitNames[destUnit],
+				mConversionList.add(new Pair<String, Double>(mUnitNames[destUnit],
 						mConverter.convert(mUnitValues, sourceUnit, destUnit, value, mPrecision)));
 			}
 		}
 
-		// Update the adapter with the converter list
-		mAdapter.setData(list);
+		mAdapter.notifyDataSetChanged();
 	}
 
+	/**
+	 * Initialize the unit converter based.
+	 *
+	 * @param converterType The converter type constant.
+	 */
 	private void setupConverter(int converterType) {
+		// Initialize the converter
 		if (converterType == Constants.TEMPERATURE) {
 			mConverter = new TemperatureConverter();
 		} else {
 			mConverter = new GenericConverter();
 		}
 
+		// Load the unit names and values
 		switch (converterType) {
 			case Constants.AREA:
 				setUnitNames(R.array.area_names);
 				setUnitValues(R.array.area_units);
 				break;
+
 			case Constants.BYTES:
 				setUnitNames(R.array.bytes_names);
 				setUnitValues(R.array.bytes_units);
 				break;
+
 			case Constants.DENSITY:
 				setUnitNames(R.array.density_names);
 				setUnitValues(R.array.density_units);
 				break;
+
 			case Constants.LENGTH:
 				setUnitNames(R.array.length_names);
 				setUnitValues(R.array.length_units);
 				break;
+
 			case Constants.MASS:
 				setUnitNames(R.array.mass_names);
 				setUnitValues(R.array.mass_units);
 				break;
+
 			case Constants.TEMPERATURE:
 				setUnitNames(R.array.temperature_names);
 				mUnitValues = null;    // temperature is a special case and doesn't use a values array
 				break;
+
 			case Constants.TIME:
 				setUnitNames(R.array.time_names);
 				setUnitValues(R.array.time_units);
 				break;
+
 			case Constants.VOLUME:
 				setUnitNames(R.array.volume_names);
 				setUnitValues(R.array.volume_units);
@@ -208,10 +201,20 @@ public class ConverterFragment extends ListFragment implements OnSharedPreferenc
 		}
 	}
 
+	/**
+	 * Load the unit names string array.
+	 *
+	 * @param resourceId the string array resource identifier.
+	 */
 	private void setUnitNames(int resourceId) {
 		mUnitNames = getResources().getStringArray(resourceId);
 	}
 
+	/**
+	 * Load the unit values string array and convert it to a Double array.
+	 *
+	 * @param resourceId the string array resource identifier.
+	 */
 	private void setUnitValues(int resourceId) {
 		// Convert the string-array resource to a Double array
 		String[] strings = getResources().getStringArray(resourceId);
@@ -220,4 +223,39 @@ public class ConverterFragment extends ListFragment implements OnSharedPreferenc
 			mUnitValues[i] = Double.valueOf(strings[i]);
 		}
 	}
+
+	/**
+	 * Update the listview when a spinner item is selected.
+	 */
+	private OnItemSelectedListener mOnSpinnerItemSelected = new OnItemSelectedListener() {
+		@Override
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+			updateListView();
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+			// do nothing
+		}
+	};
+
+	/**
+	 * Update the listview whenever the value edit text is changed.
+	 */
+	private TextWatcher mOnValueEditTextChanged = new TextWatcher() {
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
+			updateListView();
+		}
+
+		@Override
+		public void afterTextChanged(Editable s) {
+			// do nothing
+		}
+
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			// do nothing
+		}
+	};
 }

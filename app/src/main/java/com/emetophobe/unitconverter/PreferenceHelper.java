@@ -21,6 +21,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
+
 public class PreferenceHelper {
 	private static final String PREF_PRECISION = "pref_precision";
 	private static final String PREF_VALUE = "pref_value";

@@ -31,8 +31,9 @@ public class ConverterAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 	private ArrayList<Pair<String, Double>> mData;
 
-	public ConverterAdapter(Context context) {
+	public ConverterAdapter(Context context, ArrayList<Pair<String, Double>> list) {
 		mInflater = LayoutInflater.from(context);
+		mData = list;
 	}
 
 	@Override
@@ -64,7 +65,6 @@ public class ConverterAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-
 		Pair<String, Double> pair = getItem(position);
 		if (pair != null) {
 			holder.name.setText(pair.first);
@@ -72,11 +72,6 @@ public class ConverterAdapter extends BaseAdapter {
 		}
 
 		return convertView;
-	}
-
-	public void setData(ArrayList<Pair<String, Double>> conversionList) {
-		mData = conversionList;
-		notifyDataSetChanged();
 	}
 
 	private static class ViewHolder {
