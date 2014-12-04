@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2013 Mike Cunningham
- 
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
- 
-  http://www.apache.org/licenses/LICENSE-2.0
- 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
+Copyright (C) 2013-2014 Mike Cunningham
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 -->
 <resources>
 
@@ -36,7 +36,7 @@
         <item>square yards</item>
         <item>townships</item>
     </string-array>
-    
+
     <string-array name="area_units">
         <item>4046.8564224</item>
         <item>100.0</item>
@@ -72,7 +72,7 @@
 		<item>petabits</item>
 		<item>petabytes</item>
 	</string-array>
-    
+
 	<string-array name="bytes_units">
 	    <item>0.125</item>
 		<item>1.0</item>
@@ -87,7 +87,7 @@
 		<item>140737488355328.0</item>
 		<item>1125899906842624.0</item>
 	</string-array>
-	
+
 	<string-array name="density_names">
 		<item>grains/gallon (UK)</item>
 		<item>grains/gallon (US)</item>
@@ -111,7 +111,7 @@
 		<item>tons (UK)/cubic yard</item>
 		<item>tons (US)/cubic yard</item>
 	</string-array>
-    
+
     <string-array name="density_units">
         <item>0.000014253948343691203</item>
 		<item>0.000017118011571775823</item>
@@ -135,7 +135,7 @@
 		<item>1.328939184</item>
 		<item>1.186552843</item>
 	</string-array>
-	
+
 	<string-array name="length_names">
 		<item>centimeters</item>
 		<item>decimeters</item>
@@ -149,7 +149,7 @@
 		<item>nanometers</item>
 		<item>yards</item>
 	</string-array>
-	
+
     <string-array name="length_units">
         <item>0.01</item>
 		<item>0.1</item>
@@ -163,7 +163,7 @@
 		<item>1e-9</item>
 		<item>0.9144</item>
 	</string-array>
-	
+
     <string-array name="mass_names">
 		<item>carats</item>
 		<item>grams</item>
@@ -176,7 +176,7 @@
 		<item>tons (US)</item>
 		<item>tonnes</item>
 	</string-array>
-    
+
     <string-array name="mass_units">
 		<item> 0.0002</item>
 		<item>1e-3</item>
@@ -189,14 +189,14 @@
 		<item>907.18474</item>
 		<item>1000.0</item>
 	</string-array>
-	
+
     <string-array name="temperature_names">
 		<item>celsius</item>
 		<item>fahrenheit</item>
 		<item>kelvin</item>
 		<item>rankine</item>
 	</string-array>
-	
+
     <string-array name="time_names">
 		<item>centuries</item>
 		<item>days</item>
@@ -218,7 +218,7 @@
 		<item>years (julian)</item>
 		<item>years (leap)</item>
 	</string-array>
-    
+
     <string-array name="time_units">
         <item>3153600000.0</item>
 		<item>86400.0</item>
@@ -240,7 +240,7 @@
 		<item>31557600.0</item>
 		<item>31622400.0</item>
     </string-array>
-    
+
     <string-array name="volume_names">
 		<item>bushels (UK)</item>
 		<item>bushels (US)</item>
@@ -271,7 +271,7 @@
 		<item>tablespoons</item>
 		<item>teaspoons</item>
 	</string-array>
-	
+
     <string-array name="volume_units">
         <item>36.368735</item>
 		<item>35.239072</item>

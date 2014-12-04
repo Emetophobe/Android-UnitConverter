@@ -16,23 +16,19 @@
 
 package com.emetophobe.unitconverter.converters;
 
+import android.content.Context;
+
 import com.emetophobe.unitconverter.MathUtils;
 
 
-public class TemperatureConverter implements ConverterInterface {
-	/**
-	 * Convert one unit type to another unit type.
-	 *
-	 * @param units      The array of unit values.
-	 * @param sourceUnit The source unit type.
-	 * @param destUnit   The destination unit type.
-	 * @param value      The number to convert.
-	 * @param precision  The decimal precision to round to.
-	 * @return The converted number.
-	 */
+public class TemperatureConverter extends Converter {
+	public TemperatureConverter(Context context, int converterType) {
+		super(context, converterType);
+	}
+
 	@Override
-	public Double convert(Double[] units, int sourceUnit, int destUnit, double value, int precision) {
-		// Just return the value if the indexes are the same, or if the value is 0
+	protected Double convert(int sourceUnit, int destUnit, double value, int precision) {
+		// Just return the value if the unit types are the same, or if the value is 0
 		if (sourceUnit == destUnit || value == 0.0) {
 			return value;
 		}
