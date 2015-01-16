@@ -46,7 +46,7 @@ public class ConverterFragment extends ListFragment implements OnSharedPreferenc
 
 	private Converter mConverter;
 
-	private PreferenceHelper mSharedPrefs;
+	private PreferenceHelper mPrefHelper;
 	private int mPrecision;
 
 	@Override
@@ -65,10 +65,10 @@ public class ConverterFragment extends ListFragment implements OnSharedPreferenc
 		int converterType = getArguments().getInt(CONVERTER_TYPE);
 		String converterName = getArguments().getString(CONVERTER_NAME);
 
-		// Set up the shared preferences.
-		mSharedPrefs = new PreferenceHelper(getActivity(), converterName);
-		mSharedPrefs.registerListener(this);
-		mPrecision = mSharedPrefs.getPrecision();
+		// Set up the shared preferences helper.
+		mPrefHelper = new PreferenceHelper(getActivity(), converterName);
+		mPrefHelper.registerListener(this);
+		mPrecision = mPrefHelper.getPrecision();
 
 		// Set up the converter.
 		if (converterType == Constants.TEMPERATURE) {
@@ -92,22 +92,22 @@ public class ConverterFragment extends ListFragment implements OnSharedPreferenc
 		mValueEdit.addTextChangedListener(mOnValueEditTextChanged);
 
 		// Restore the previous edit text value and spinner position.
-		mValueEdit.setText(mSharedPrefs.getValue());
-		mUnitSpinner.setSelection(mSharedPrefs.getIndex());
+		mValueEdit.setText(mPrefHelper.getValue());
+		mUnitSpinner.setSelection(mPrefHelper.getIndex());
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		// Save the current unit type and value
-		mSharedPrefs.setValue(mValueEdit.getText().toString());
-		mSharedPrefs.setIndex(mUnitSpinner.getSelectedItemPosition());
+		mPrefHelper.setValue(mValueEdit.getText().toString());
+		mPrefHelper.setIndex(mUnitSpinner.getSelectedItemPosition());
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		mSharedPrefs.unregisterListener(this);
+		mPrefHelper.unregisterListener(this);
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class ConverterFragment extends ListFragment implements OnSharedPreferenc
 	 */
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		mPrecision = mSharedPrefs.getPrecision();
+		mPrecision = mPrefHelper.getPrecision();
 		updateListView();
 	}
 
