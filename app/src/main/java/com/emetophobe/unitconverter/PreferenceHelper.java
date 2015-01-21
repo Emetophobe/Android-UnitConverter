@@ -31,41 +31,76 @@ public class PreferenceHelper {
 	private static final String DEFAULT_PRECISION = "5";
 
 	private SharedPreferences mSharedPrefs;
-	private SharedPreferences mUnitPrefs;
+	private SharedPreferences mConverterPrefs;
 
 	public PreferenceHelper(Context context, String converterName) {
 		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-		mUnitPrefs = context.getSharedPreferences(converterName + "Prefs", 0);
+		mConverterPrefs = context.getSharedPreferences(converterName + "Prefs", 0);
 	}
 
+	/**
+	 * Returns the precision preference.
+	 *
+	 * @return an integer value between 0 and 10.
+	 */
 	public int getPrecision() {
 		return MathUtils.parseInt(mSharedPrefs.getString(PREF_PRECISION, DEFAULT_PRECISION));
 	}
 
+	/**
+	 * Returns the saved unit value (as a string).
+	 *
+	 * @return The string value.
+	 */
 	public String getValue() {
-		return mUnitPrefs.getString(PREF_VALUE, DEFAULT_VALUE);
+		return mConverterPrefs.getString(PREF_VALUE, DEFAULT_VALUE);
 	}
 
+	/**
+	 * Saves the converter unit value.
+	 *
+	 * @param value The string value.
+	 */
 	public void setValue(String value) {
-		SharedPreferences.Editor editor = mUnitPrefs.edit();
+		SharedPreferences.Editor editor = mConverterPrefs.edit();
 		editor.putString(PREF_VALUE, value);
 		editor.apply();
 	}
 
+	/**
+	 * Returns the saved spinner position.
+	 *
+	 * @return The spinner position.
+	 */
 	public int getIndex() {
-		return mUnitPrefs.getInt(PREF_INDEX, 0);
+		return mConverterPrefs.getInt(PREF_INDEX, 0);
 	}
 
+	/**
+	 * Saves the spinner position.
+	 *
+	 * @param index The spinner position.
+	 */
 	public void setIndex(int index) {
-		SharedPreferences.Editor editor = mUnitPrefs.edit();
+		SharedPreferences.Editor editor = mConverterPrefs.edit();
 		editor.putInt(PREF_INDEX, index);
 		editor.apply();
 	}
 
+	/**
+	 * Registers a shared preference listener.
+	 *
+	 * @param listener The callback reference.
+	 */
 	public void registerListener(OnSharedPreferenceChangeListener listener) {
 		mSharedPrefs.registerOnSharedPreferenceChangeListener(listener);
 	}
 
+	/**
+	 * Unregisters a shared preference listener.
+	 *
+	 * @param listener The callback reference.
+	 */
 	public void unregisterListener(OnSharedPreferenceChangeListener listener) {
 		mSharedPrefs.unregisterOnSharedPreferenceChangeListener(listener);
 	}
