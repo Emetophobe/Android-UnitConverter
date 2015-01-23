@@ -26,7 +26,7 @@ import com.emetophobe.unitconverter.R;
 import java.util.ArrayList;
 
 
-public class Converter {
+public class GenericConverter {
 	protected String[] mUnitNames;
 	protected Double[] mUnitValues;
 
@@ -38,7 +38,7 @@ public class Converter {
 	 * @param context       The context.
 	 * @param converterType The converter type constant.
 	 */
-	public Converter(Context context, int converterType) {
+	public GenericConverter(Context context, int converterType) {
 		mConversionList = new ArrayList<Pair<String, Double>>();
 
 		// Load the unit names and values

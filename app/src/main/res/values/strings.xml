@@ -19,7 +19,7 @@ limitations under the License.
     <string name="app_name">Unit Converter</string>
     <string name="action_settings">Settings</string>
 
-    <string name="value_hint">Enter a unit value</string>
+    <string name="value_hint">Enter a value</string>
     <string name="empty_value">0.0</string>
     <string name="title_settings">Settings</string>
     <string name="equals">=</string>

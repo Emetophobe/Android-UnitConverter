@@ -21,7 +21,7 @@ import android.content.Context;
 import com.emetophobe.unitconverter.MathUtils;
 
 
-public class TemperatureConverter extends Converter {
+public class TemperatureConverter extends GenericConverter {
 	public TemperatureConverter(Context context, int converterType) {
 		super(context, converterType);
 	}

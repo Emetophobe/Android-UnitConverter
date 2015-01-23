@@ -20,6 +20,7 @@ import android.app.ListFragment;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -32,21 +33,23 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.emetophobe.unitconverter.converters.Converter;
+import com.emetophobe.unitconverter.converters.GenericConverter;
 import com.emetophobe.unitconverter.converters.TemperatureConverter;
 
 
 public class ConverterFragment extends ListFragment implements OnSharedPreferenceChangeListener {
 	public static final String CONVERTER_TYPE = "converter_type";
-	public static final String CONVERTER_NAME = "converter_name";
+
+	private static final String PREF_PRECISION = "pref_precision";
+	private static final String DEFAULT_PRECISION = "5";
 
 	private Spinner mUnitSpinner;
 	private EditText mValueEdit;
 	private ConverterAdapter mAdapter;
 
-	private Converter mConverter;
+	private GenericConverter mConverter;
 
-	private PreferenceHelper mPrefHelper;
+	private SharedPreferences mSharedPrefs;
 	private int mPrecision;
 
 	@Override
@@ -61,20 +64,19 @@ public class ConverterFragment extends ListFragment implements OnSharedPreferenc
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		// Get the converter type and name.
+		// Get the converter type from the argument bundle.
 		int converterType = getArguments().getInt(CONVERTER_TYPE);
-		String converterName = getArguments().getString(CONVERTER_NAME);
 
-		// Set up the shared preferences helper.
-		mPrefHelper = new PreferenceHelper(getActivity(), converterName);
-		mPrefHelper.registerListener(this);
-		mPrecision = mPrefHelper.getPrecision();
+		// Set up the shared preferences.
+		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		mSharedPrefs.registerOnSharedPreferenceChangeListener(this);
+		updatePrecision();
 
 		// Set up the converter.
 		if (converterType == Constants.TEMPERATURE) {
 			mConverter = new TemperatureConverter(getActivity(), converterType);
 		} else {
-			mConverter = new Converter(getActivity(), converterType);
+			mConverter = new GenericConverter(getActivity(), converterType);
 		}
 
 		// Set up the list adapter.
@@ -86,28 +88,41 @@ public class ConverterFragment extends ListFragment implements OnSharedPreferenc
 				android.R.layout.simple_spinner_item, mConverter.getUnitNames());
 		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mUnitSpinner.setAdapter(spinnerAdapter);
-		mUnitSpinner.setOnItemSelectedListener(mOnSpinnerItemSelected);
+		mUnitSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				updateListView();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// do nothing
+			}
+		});
 
 		// Set up the value edit text watcher.
-		mValueEdit.addTextChangedListener(mOnValueEditTextChanged);
+		mValueEdit.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				updateListView();
+			}
 
-		// Restore the previous edit text value and spinner position.
-		mValueEdit.setText(mPrefHelper.getValue());
-		mUnitSpinner.setSelection(mPrefHelper.getIndex());
-	}
+			@Override
+			public void afterTextChanged(Editable s) {
+				// do nothing
+			}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		// Save the current unit type and value
-		mPrefHelper.setValue(mValueEdit.getText().toString());
-		mPrefHelper.setIndex(mUnitSpinner.getSelectedItemPosition());
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				// do nothing
+			}
+		});
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		mPrefHelper.unregisterListener(this);
+		mSharedPrefs.unregisterOnSharedPreferenceChangeListener(this);
 	}
 
 	/**
@@ -115,54 +130,29 @@ public class ConverterFragment extends ListFragment implements OnSharedPreferenc
 	 */
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		mPrecision = mPrefHelper.getPrecision();
-		updateListView();
+		if (key.equals(PREF_PRECISION)) {
+			updatePrecision();
+			updateListView();
+		}
+	}
+
+	/**
+	 * Stores the precision preference.
+	 */
+	public void updatePrecision() {
+		mPrecision = MathUtils.parseInt(mSharedPrefs.getString(PREF_PRECISION, DEFAULT_PRECISION));
 	}
 
 	/**
 	 * Generate the conversion data and update the adapter.
 	 */
 	private void updateListView() {
-		// Get the unit type and value to be converted
+		// Get the unit type and value to be converted.
 		int sourceUnit = mUnitSpinner.getSelectedItemPosition();
 		double value = MathUtils.parseDouble(mValueEdit.getText().toString());
 
+		// Create the conversion list and notify the adapter.
 		mConverter.generate(sourceUnit, value, mPrecision);
 		mAdapter.notifyDataSetChanged();
 	}
-
-	/**
-	 * Update the listview when a spinner item is selected.
-	 */
-	private OnItemSelectedListener mOnSpinnerItemSelected = new OnItemSelectedListener() {
-		@Override
-		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-			updateListView();
-		}
-
-		@Override
-		public void onNothingSelected(AdapterView<?> arg0) {
-			// do nothing
-		}
-	};
-
-	/**
-	 * Update the listview when the value edit text is changed.
-	 */
-	private TextWatcher mOnValueEditTextChanged = new TextWatcher() {
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before, int count) {
-			updateListView();
-		}
-
-		@Override
-		public void afterTextChanged(Editable s) {
-			// do nothing
-		}
-
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			// do nothing
-		}
-	};
 }

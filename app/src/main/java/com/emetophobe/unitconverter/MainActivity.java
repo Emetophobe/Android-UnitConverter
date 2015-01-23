@@ -81,7 +81,6 @@ public class MainActivity extends ActionBarActivity implements NavDrawerFragment
 		ConverterFragment fragment = new ConverterFragment();
 		Bundle args = new Bundle();
 		args.putInt(ConverterFragment.CONVERTER_TYPE, position);
-		args.putString(ConverterFragment.CONVERTER_NAME, mTitle.toString());
 		fragment.setArguments(args);
 
 		getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
