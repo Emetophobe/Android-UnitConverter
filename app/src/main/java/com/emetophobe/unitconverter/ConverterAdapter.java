@@ -25,13 +25,14 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ConverterAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
-	private ArrayList<Pair<String, Double>> mData;
+	private List<Pair<String, Double>> mData;
 
-	public ConverterAdapter(Context context, ArrayList<Pair<String, Double>> list) {
+	public ConverterAdapter(Context context, List<Pair<String, Double>> list) {
 		mInflater = LayoutInflater.from(context);
 		mData = list;
 	}

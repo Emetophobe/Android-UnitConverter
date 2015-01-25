@@ -24,13 +24,14 @@ import com.emetophobe.unitconverter.MathUtils;
 import com.emetophobe.unitconverter.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class GenericConverter {
 	protected String[] mUnitNames;
 	protected Double[] mUnitValues;
 
-	protected ArrayList<Pair<String, Double>> mConversionList;
+	protected List<Pair<String, Double>> mConversionList;
 
 	/**
 	 * Construct the converter.
@@ -162,7 +163,7 @@ public class GenericConverter {
 	 *
 	 * @return The array of conversions.
 	 */
-	public ArrayList<Pair<String, Double>> getConversionList() {
+	public List<Pair<String, Double>> getConversionList() {
 		return mConversionList;
 	}
 }
