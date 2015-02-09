@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Mike Cunningham
+ * Copyright (C) 2013-2015 Mike Cunningham
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.emetophobe.unitconverter;
+package com.emetophobe.unitconverter.fragments;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -36,6 +36,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.emetophobe.unitconverter.R;
 
 
 public class NavDrawerFragment extends Fragment {

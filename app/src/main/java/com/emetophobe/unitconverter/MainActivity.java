@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Mike Cunningham
+ * Copyright (C) 2013-2015 Mike Cunningham
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.emetophobe.unitconverter.fragments.GenericConverterFragment;
+import com.emetophobe.unitconverter.fragments.NavDrawerFragment;
+import com.emetophobe.unitconverter.fragments.TemperatureConverterFragment;
 
 
 public class MainActivity extends ActionBarActivity implements NavDrawerFragment.NavigationDrawerCallbacks {
@@ -78,9 +82,15 @@ public class MainActivity extends ActionBarActivity implements NavDrawerFragment
 	public void onNavigationDrawerItemSelected(int position) {
 		mTitle = mConverterNames[position];
 
-		ConverterFragment fragment = new ConverterFragment();
+		GenericConverterFragment fragment;
+		if (ConverterType.fromInteger(position) == ConverterType.TEMPERATURE) {
+			fragment = new TemperatureConverterFragment();
+		} else {
+			fragment = new GenericConverterFragment();
+		}
+
 		Bundle args = new Bundle();
-		args.putInt(ConverterFragment.CONVERTER_TYPE, position);
+		args.putInt(GenericConverterFragment.EXTRA_CONVERTER_TYPE, position);
 		fragment.setArguments(args);
 
 		getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();

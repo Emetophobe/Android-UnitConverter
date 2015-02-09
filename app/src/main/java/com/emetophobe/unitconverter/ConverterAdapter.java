@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Mike Cunningham
+ * Copyright (C) 2013-2015 Mike Cunningham
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

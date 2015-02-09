@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Mike Cunningham
+ * Copyright (C) 2013-2015 Mike Cunningham
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,19 @@
  * limitations under the License.
  */
 
-package com.emetophobe.unitconverter;
+package com.emetophobe.unitconverter.utils;
 
 import android.util.Log;
 
 
 public class MathUtils {
+	/**
+	 * This class cannot be instantiated
+	 */
+	private MathUtils() {
+
+	}
+
 	/**
 	 * Round a number to n decimal places.
 	 *

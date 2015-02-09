@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Mike Cunningham
+ * Copyright (C) 2013-2015 Mike Cunningham
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,27 @@
  * limitations under the License.
  */
 
-package com.emetophobe.unitconverter.converters;
+package com.emetophobe.unitconverter.fragments;
 
-import android.content.Context;
+import com.emetophobe.unitconverter.R;
+import com.emetophobe.unitconverter.utils.MathUtils;
 
-import com.emetophobe.unitconverter.MathUtils;
 
+/**
+ * Special converter class to handle temperature conversions.
+ */
+public class TemperatureConverterFragment extends GenericConverterFragment {
 
-public class TemperatureConverter extends GenericConverter {
-	public TemperatureConverter(Context context, int converterType) {
-		super(context, converterType);
-	}
-
+	/**
+	 * Convert from one temperature unit type to another.
+	 *
+	 * @param sourceUnit The source unit type.
+	 * @param destUnit   The destination unit type.
+	 * @param value      The number to convert.
+	 * @return The converted result.
+	 */
 	@Override
-	protected Double convert(int sourceUnit, int destUnit, double value, int precision) {
+	protected Double convert(int sourceUnit, int destUnit, double value) {
 		// Just return the value if the unit types are the same, or if the value is 0
 		if (sourceUnit == destUnit || value == 0.0) {
 			return value;
@@ -37,7 +44,7 @@ public class TemperatureConverter extends GenericConverter {
 		value = fromKelvin(destUnit, value); // Then convert the value from kelvin to the desired unit
 
 		// Round the result
-		return MathUtils.round(value, precision);
+		return MathUtils.round(value, mPrecision);
 	}
 
 	/**
@@ -78,5 +85,21 @@ public class TemperatureConverter extends GenericConverter {
 			default:
 				return value;
 		}
+	}
+
+	/**
+	 * Returns the String array of unit names for the temperature converter.
+	 */
+	@Override
+	public String[] getUnitNames() {
+		return getResources().getStringArray(R.array.temperature_names);
+	}
+
+	/**
+	 * The temperature converter doesn't use the unit values array, so just return null.
+	 */
+	@Override
+	protected Double[] getUnitValues() {
+		return null;
 	}
 }

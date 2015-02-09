@@ -58,7 +58,7 @@ limitations under the License.
 
 		<fragment
 			android:id="@+id/navigation_drawer"
-			android:name="com.emetophobe.unitconverter.NavDrawerFragment"
+			android:name="com.emetophobe.unitconverter.fragments.NavDrawerFragment"
 			android:layout_width="@dimen/navigation_drawer_width"
 			android:layout_height="match_parent"
 			android:layout_gravity="start"

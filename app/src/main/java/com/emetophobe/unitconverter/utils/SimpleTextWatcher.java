@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Mike Cunningham
+ * Copyright (C) 2013-2015 Mike Cunningham
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,27 @@
  * limitations under the License.
  */
 
-package com.emetophobe.unitconverter;
+package com.emetophobe.unitconverter.utils;
 
-public class Constants {
-	/** Unit conversion types. */
-	public static final int AREA = 0;
-	public static final int BYTES = 1;
-	public static final int DENSITY = 2;
-	public static final int LENGTH = 3;
-	public static final int MASS = 4;
-	public static final int TEMPERATURE = 5;
-	public static final int TIME = 6;
-	public static final int VOLUME = 7;
+import android.text.Editable;
+import android.text.TextWatcher;
+
+/**
+ * A skeletal implementation of the TextWatcher interface.
+ */
+public class SimpleTextWatcher implements TextWatcher {
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+	}
+
+	@Override
+	public void afterTextChanged(Editable s) {
+
+	}
 }
