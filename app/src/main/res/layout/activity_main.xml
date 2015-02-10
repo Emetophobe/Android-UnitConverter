@@ -22,12 +22,7 @@ limitations under the License.
 			  android:orientation="vertical"
 			  tools:context="com.emetophobe.unitconverter.MainActivity">
 
-	<android.support.v7.widget.Toolbar
-		android:id="@+id/toolbar"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/colorPrimary"
-		style="@style/AppToolbarStyle"/>
+	<include layout="@layout/widget_toolbar"/>
 
 	<android.support.v4.widget.DrawerLayout
 		android:id="@+id/drawer_layout"
