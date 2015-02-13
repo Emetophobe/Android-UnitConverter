@@ -20,6 +20,7 @@ import android.app.ListFragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.ArrayRes;
 import android.support.annotation.NonNull;
 import android.support.v7.appcompat.BuildConfig;
 import android.util.Pair;
@@ -280,7 +281,7 @@ public class GenericConverterFragment extends ListFragment implements SharedPref
 	 * @param resourceId The string array resource identifier.
 	 * @return The Double array of unit values.
 	 */
-	private Double[] getUnitValues(int resourceId) {
+	private Double[] getUnitValues(@ArrayRes int resourceId) {
 		String[] strings = getResources().getStringArray(resourceId);
 		Double[] values = new Double[strings.length];
 		for (int i = 0; i < strings.length; i++) {
