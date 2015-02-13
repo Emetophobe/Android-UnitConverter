@@ -246,7 +246,7 @@ public class GenericConverterFragment extends ListFragment implements SharedPref
 			case VOLUME:
 				return getResources().getStringArray(R.array.volume_names);
 			default:
-				throw new IllegalArgumentException("Unknown converter type: " + this);
+				throw new IllegalArgumentException("Unknown converter type: " + mConverterType);
 		}
 	}
 
@@ -270,7 +270,7 @@ public class GenericConverterFragment extends ListFragment implements SharedPref
 			case VOLUME:
 				return getUnitValues(R.array.volume_units);
 			default:
-				throw new IllegalArgumentException("Unknown converter type: " + this);
+				throw new IllegalArgumentException("Unknown converter type: " + mConverterType);
 		}
 	}
 
