@@ -197,7 +197,7 @@ public class GenericConverterFragment extends ListFragment implements SharedPref
 	/**
 	 * Returns a String array of unit names for the current converter type.
 	 */
-	public String[] getUnitNames() {
+	protected String[] getUnitNames() {
 		switch (mConverterType) {
 			case AREA:
 				return getResources().getStringArray(R.array.area_names);

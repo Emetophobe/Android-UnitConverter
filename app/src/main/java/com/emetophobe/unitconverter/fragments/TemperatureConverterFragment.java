@@ -17,9 +17,26 @@
 package com.emetophobe.unitconverter.fragments;
 
 import com.emetophobe.unitconverter.MathUtils;
+import com.emetophobe.unitconverter.R;
 
 
 public class TemperatureConverterFragment extends GenericConverterFragment {
+
+	/**
+	 * Returns the String array of unit names for the temperature converter.
+	 */
+	@Override
+	protected String[] getUnitNames() {
+		return getResources().getStringArray(R.array.temperature_names);
+	}
+
+	/**
+	 * The temperature converter doesn't use the unit values array, so just return null.
+	 */
+	@Override
+	protected Double[] getUnitValues() {
+		return null;
+	}
 
 	/**
 	 * Convert from one temperature unit type to another.
