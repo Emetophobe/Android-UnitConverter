@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.emetophobe.unitconverter;
+package com.emetophobe.unitconverter.adapters;
 
 import android.content.Context;
 import android.util.Pair;
@@ -23,6 +23,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.emetophobe.unitconverter.R;
 
 import java.util.List;
 

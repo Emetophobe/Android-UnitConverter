@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.emetophobe.unitconverter;
+package com.emetophobe.unitconverter.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +25,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.emetophobe.unitconverter.ConverterType;
+import com.emetophobe.unitconverter.R;
 import com.emetophobe.unitconverter.fragments.GenericConverterFragment;
 import com.emetophobe.unitconverter.fragments.NavDrawerFragment;
 import com.emetophobe.unitconverter.fragments.TemperatureConverterFragment;
@@ -81,16 +83,17 @@ public class MainActivity extends ActionBarActivity implements NavDrawerFragment
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		mTitle = mConverterNames[position];
+		ConverterType converterType = ConverterType.fromInteger(position);
 
 		GenericConverterFragment fragment;
-		if (ConverterType.fromInteger(position) == ConverterType.TEMPERATURE) {
+		if (converterType == ConverterType.TEMPERATURE) {
 			fragment = new TemperatureConverterFragment();
 		} else {
 			fragment = new GenericConverterFragment();
 		}
 
 		Bundle args = new Bundle();
-		args.putInt(GenericConverterFragment.EXTRA_CONVERTER_TYPE, position);
+		args.putSerializable(GenericConverterFragment.EXTRA_CONVERTER_TYPE, converterType);
 		fragment.setArguments(args);
 
 		getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();

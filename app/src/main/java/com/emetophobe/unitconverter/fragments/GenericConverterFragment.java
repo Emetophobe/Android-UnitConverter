@@ -26,95 +26,61 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.emetophobe.unitconverter.ConverterAdapter;
 import com.emetophobe.unitconverter.ConverterType;
+import com.emetophobe.unitconverter.MathUtils;
 import com.emetophobe.unitconverter.R;
-import com.emetophobe.unitconverter.utils.MathUtils;
-import com.emetophobe.unitconverter.utils.SimpleOnItemSelectedListener;
-import com.emetophobe.unitconverter.utils.SimpleTextWatcher;
+import com.emetophobe.unitconverter.adapters.ConverterAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnItemSelected;
+import butterknife.OnTextChanged;
 
-/**
- * Generic converter class that handles all unit types, except for temperature.
- */
+
 public class GenericConverterFragment extends ListFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
-	/**
-	 * Converter type intent extra.
-	 */
 	public static final String EXTRA_CONVERTER_TYPE = "converter_type";
-
-	/**
-	 * Precision preference key.
-	 */
 	private static final String PREF_PRECISION = "pref_precision";
-
-	/**
-	 * Default precision preference value.
-	 */
 	private static final String DEFAULT_PRECISION = "5";
 
-	/**
-	 * Array of unit names.
-	 */
-	protected String[] mUnitNames;
-
-	/**
-	 * Array of unit values that corresponds to the unit names.
-	 */
-	protected Double[] mUnitValues;
-
-	/**
-	 * Decimal rounding precision.
-	 */
-	protected int mPrecision;
-
-	/**
-	 * Shared preferences reference used to retrieve and update the precision preference.
-	 */
+	private ConverterType mConverterType;
 	private SharedPreferences mSharedPrefs;
 
-	/**
-	 * List of pairs used to hold the conversion data.
-	 */
+	protected String[] mUnitNames;
+	protected Double[] mUnitValues;
+	protected int mPrecision;
 	private List<Pair<String, Double>> mConversionList = new ArrayList<>();
 
-	/**
-	 * Converter adapter used to display the conversion data.
-	 */
 	private ConverterAdapter mAdapter;
 
-	/**
-	 * Spinner for selecting the source unit type.
-	 */
-	private Spinner mUnitSpinner;
+	@InjectView(R.id.unit_spinner)
+	protected Spinner mUnitSpinner;
 
-	/**
-	 * Value edit text to input the source value to converter.
-	 */
-	private EditText mValueEdit;
+	@InjectView(R.id.value_edit)
+	protected EditText mValueEdit;
 
-	/**
-	 * The selected converter type.
-	 */
-	private ConverterType mConverterType;
 
-	/**
-	 * Create the fragment's views.
-	 */
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_converter, container, false);
-		mUnitSpinner = (Spinner) view.findViewById(R.id.unit_spinner);
-		mValueEdit = (EditText) view.findViewById(R.id.value_edit);
-		return view;
+		return inflater.inflate(R.layout.fragment_converter, container, false);
+	}
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		ButterKnife.inject(this, view);
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		ButterKnife.reset(this);
 	}
 
 	@Override
@@ -122,7 +88,7 @@ public class GenericConverterFragment extends ListFragment implements SharedPref
 		super.onActivityCreated(savedInstanceState);
 
 		// Get the converter type and load the unit names and values
-		mConverterType = ConverterType.fromInteger(getArguments().getInt(EXTRA_CONVERTER_TYPE));
+		mConverterType = (ConverterType) getArguments().getSerializable(EXTRA_CONVERTER_TYPE);
 		mUnitNames = getUnitNames();
 		mUnitValues = getUnitValues();
 
@@ -140,20 +106,6 @@ public class GenericConverterFragment extends ListFragment implements SharedPref
 				android.R.layout.simple_spinner_item, mUnitNames);
 		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mUnitSpinner.setAdapter(spinnerAdapter);
-		mUnitSpinner.setOnItemSelectedListener(new SimpleOnItemSelectedListener() {
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				updateListView();
-			}
-		});
-
-		// Set up the value edit text watcher.
-		mValueEdit.addTextChangedListener(new SimpleTextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				updateListView();
-			}
-		});
 	}
 
 	@Override
@@ -174,9 +126,25 @@ public class GenericConverterFragment extends ListFragment implements SharedPref
 	}
 
 	/**
+	 * Called when the unit Spinner is changed.
+	 */
+	@OnItemSelected(R.id.unit_spinner)
+	protected void onItemSelected(int position) {
+		updateListView();
+	}
+
+	/**
+	 * Called when the value EditText is changed.
+	 */
+	@OnTextChanged(R.id.value_edit)
+	protected void onTextChanged(CharSequence text) {
+		updateListView();
+	}
+
+	/**
 	 * Stores the precision preference.
 	 */
-	protected void updatePrecision() {
+	private void updatePrecision() {
 		mPrecision = MathUtils.parseInt(mSharedPrefs.getString(PREF_PRECISION, DEFAULT_PRECISION));
 	}
 

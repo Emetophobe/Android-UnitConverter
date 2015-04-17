@@ -16,13 +16,9 @@
 
 package com.emetophobe.unitconverter.fragments;
 
-import com.emetophobe.unitconverter.R;
-import com.emetophobe.unitconverter.utils.MathUtils;
+import com.emetophobe.unitconverter.MathUtils;
 
 
-/**
- * Special converter class to handle temperature conversions.
- */
 public class TemperatureConverterFragment extends GenericConverterFragment {
 
 	/**
@@ -85,21 +81,5 @@ public class TemperatureConverterFragment extends GenericConverterFragment {
 			default:
 				return value;
 		}
-	}
-
-	/**
-	 * Returns the String array of unit names for the temperature converter.
-	 */
-	@Override
-	public String[] getUnitNames() {
-		return getResources().getStringArray(R.array.temperature_names);
-	}
-
-	/**
-	 * The temperature converter doesn't use the unit values array, so just return null.
-	 */
-	@Override
-	protected Double[] getUnitValues() {
-		return null;
 	}
 }

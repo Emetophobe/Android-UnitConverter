@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.emetophobe.unitconverter;
+package com.emetophobe.unitconverter.activities;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
@@ -22,6 +22,8 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import com.emetophobe.unitconverter.R;
 
 
 public class SettingsActivity extends ActionBarActivity {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.emetophobe.unitconverter.utils;
+package com.emetophobe.unitconverter;
 
 import android.util.Log;
 
